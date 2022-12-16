@@ -25,7 +25,9 @@ public class AuthenticateController {
 	}
 
 	public void register(Context ctx) {
-
+		/* There is no code to handle somethign going wrong, like accidentally trying to create an
+		 * account that is already taken.
+		 */
 		UsernamePasswordAuthentication registerRequest = ctx.bodyAsClass(UsernamePasswordAuthentication.class);
 
 		User newUser = userService.register(registerRequest);
