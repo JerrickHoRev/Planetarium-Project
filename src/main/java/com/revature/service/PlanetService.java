@@ -32,8 +32,8 @@ public class PlanetService {
 		return this.dao.getPlanetById(planetId);
 	}
 
-	public Planet createPlanet(String userName, Planet p) {
-		return this.dao.createPlanet(userName, p);
+	public Planet createPlanet(String username, Planet p) {
+		return this.dao.createPlanet(p);
 	}
 
 	public void deletePlanetById(int planetId) {

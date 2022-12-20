@@ -70,8 +70,8 @@ public class PlanetDao {
 		try (Connection connection = ConnectionUtil.createConnection()) {
 			String sql = "insert into planets values (default,?,?)";
 			PreparedStatement ps = connection.prepareStatement(sql);
-			ps.setObject(1, p);
-			ps.setObject(2, p);
+			ps.setString(1, p.getName());
+			ps.setInt(2, p.getOwnerId());
 			ResultSet rs = ps.executeQuery();
 			rs.next();
 			Planet newPlanet = new Planet();
@@ -99,8 +99,9 @@ public class PlanetDao {
 
 	public static void main(String[] args) {
 		PlanetDao planetDao = new PlanetDao();
-		Planet p; 
-		p.setObject(10, "earth", 4);
-		System.out.println(planetDao.createPlanet("Saturn", 10, "deer"));
+		Planet p = new Planet();
+		p.setName("Saturn");
+		p.setOwnerId(3);
+		System.out.println(planetDao.createPlanet(p));
 	}
 }
