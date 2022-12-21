@@ -22,7 +22,7 @@ echo "HTTP success rate: $result%"
 httpResponse=$(grep Response rollingFile.log | cut -f 2 -d, | cut -f 4 -d " ")
 httpResponseTotal=0
 httpResponseTime=0
-
+echo $httpResponse | tr -s ' \t' '\n' >> values.txt
 
 for code in $httpResponse
 do
