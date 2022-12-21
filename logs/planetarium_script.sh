@@ -1,11 +1,9 @@
-grep Response rollingFile.log | cut -f 1 -d, | tr -d "[]"
+grep Response rollingFile.log
 httpCodes=$(grep Response rollingFile.log | cut -f 1 -d, | tr -d "[]" | cut -f 2 -d " ")
-# then create any necessary variables to measure your SLI
 httpRequestTotal=0
 httpFailures=0
 
 
-# then loop through the log data and perform any necessary operations to initialize your variables
 for code in $httpCodes
 do
         ((httpRequestTotal++))
@@ -15,10 +13,24 @@ do
         fi
 done
 
-# save the SLI value and return it
 
 httpSuccess=$(($httpRequestTotal - $httpFailures))
 
-result=$(awk "BEGIN {print $httpSuccess / $httpRequestTotal * 100}") # this is an alternative way to get the same result as above if bc does not work
-
+result=$(awk "BEGIN {print $httpSuccess / $httpRequestTotal * 100}" end) 
 echo "HTTP success rate: $result%"
+
+httpResponse=$(grep Response rollingFile.log | cut -f 2 -d, | cut -f 4 -d " ")
+httpResponseTotal=0
+httpResponseTime=0
+
+
+for code in $httpResponse
+do
+        ((httpResponseTotal++))
+done
+
+sum=$(awk '{ sum += $0 } END { print sum }' values.txt)
+
+ResponseAverage=$(awk "BEGIN {print $sum / $httpResponseTotal}")
+
+echo "HTTP Response Average: $ResponseAverage"
