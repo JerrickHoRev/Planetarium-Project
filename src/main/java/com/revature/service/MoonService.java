@@ -46,6 +46,11 @@ public class MoonService {
 
 	public List<Moon> getMoonsFromPlanet(int planetId) {
 		// TODO Auto-generated method stub
-		return this.getMoonsFromPlanet(planetId);
+		try {
+			return this.dao.getMoonsFromPlanet(planetId);
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			return getMoonsFromPlanet(planetId);
+		}
 	}
 }

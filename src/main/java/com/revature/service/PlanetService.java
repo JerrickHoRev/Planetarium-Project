@@ -42,7 +42,10 @@ public class PlanetService {
 
 	public static void main(String[] args) {
 		PlanetService planetService = new PlanetService();
-		planetService.getAllPlanets();
+		Planet p = new Planet();
+		p.setName("Jupiter");
+		p.setOwnerId(7);
+		System.out.print(planetService.createPlanet(null, p));
 	}
 }
 

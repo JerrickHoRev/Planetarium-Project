@@ -74,11 +74,11 @@ public class MoonDao {
 			ps.setInt(2, m.getMyPlanetId());
 			ResultSet rs = ps.executeQuery();
 			rs.next();
-			Moon newPlanet = new Moon();
-			newPlanet.setId(rs.getInt(1));
-			newPlanet.setName(rs.getString(2));
-			newPlanet.setMyPlanetId(rs.getInt(3));
-			return newPlanet;
+			Moon newMoon = new Moon();
+			newMoon.setId(rs.getInt(1));
+			newMoon.setName(rs.getString(2));
+			newMoon.setMyPlanetId(rs.getInt(3));
+			return newMoon;
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			return new Moon();

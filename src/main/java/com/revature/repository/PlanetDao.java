@@ -100,8 +100,8 @@ public class PlanetDao {
 	public static void main(String[] args) {
 		PlanetDao planetDao = new PlanetDao();
 		Planet p = new Planet();
-		p.setName("Saturn");
-		p.setOwnerId(3);
+		p.setName("Jupiter");
+		p.setOwnerId(5);
 		System.out.println(planetDao.createPlanet(p));
 	}
 }
