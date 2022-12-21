@@ -66,19 +66,19 @@ public class MoonDao {
 		}
 	}
 
-	public Moon createMoon(String moonName, int planetId) {
+	public Moon createMoon(Moon m) {
 		try (Connection connection = ConnectionUtil.createConnection()) {
 			String sql = "insert into moons values (default,?,?)";
 			PreparedStatement ps = connection.prepareStatement(sql);
-			ps.setString(1, moonName);
-			ps.setInt(2, planetId);
+			ps.setString(1, m.getName());
+			ps.setInt(2, m.getMyPlanetId());
 			ResultSet rs = ps.executeQuery();
 			rs.next();
-			Moon newMoon = new Moon();
-			newMoon.setId(rs.getInt(1));
-			newMoon.setName(rs.getString(2));
-			newMoon.setMyPlanetId(rs.getInt(3));
-			return newMoon;
+			Moon newPlanet = new Moon();
+			newPlanet.setId(rs.getInt(1));
+			newPlanet.setName(rs.getString(2));
+			newPlanet.setMyPlanetId(rs.getInt(3));
+			return newPlanet;
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			return new Moon();
@@ -117,7 +117,10 @@ public class MoonDao {
 
 	public static void main(String[] args) throws SQLException {
 		MoonDao moonDao = new MoonDao();
-		System.out.println(moonDao.getMoonsFromPlanet(1));
+		Moon m = new Moon();
+		m.setName("moon");
+		m.setMyPlanetId(1);
+		System.out.println(moonDao.createMoon(m));
 	}
 
 }
